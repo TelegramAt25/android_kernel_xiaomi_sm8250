@@ -357,7 +357,7 @@ static int cs35l41_fast_switch_file_put(struct snd_kcontrol *kcontrol,
 		cs35l41->fast_switch_file_idx = i;
 		ret = cs35l41_do_fast_switch(cs35l41);
 	} else {
-		dev_info(
+		dev_dbg(
 			cs35l41->dev,
 			"do not need switch to delta (%u),origin delta %d, fast_switch_en %d\n",
 			i, cs35l41->fast_switch_file_idx,
@@ -917,7 +917,7 @@ static int cs35l41_main_amp_event(struct snd_soc_dapm_widget *w,
 	int i;
 	bool pdn;
 	unsigned int val;
-	dev_info(cs35l41->dev, "%s: event = %d.\n", __func__, event);
+	dev_dbg(cs35l41->dev, "%s: event = %d.\n", __func__, event);
 	switch (event) {
 	case SND_SOC_DAPM_POST_PMU:
 		regmap_multi_reg_write_bypassed(cs35l41->regmap,
@@ -1314,7 +1314,7 @@ static int cs35l41_pcm_hw_params(struct snd_pcm_substream *substream,
 	}
 
 	regmap_read(cs35l41->regmap, CS35L41_PLL_CLK_CTRL, &val);
-	dev_info(cs35l41->dev, "%s: Before 0x2c04 <= 0x%x\n", __func__, val);
+	dev_dbg(cs35l41->dev, "%s: Before 0x2c04 <= 0x%x\n", __func__, val);
 	for (i = 0; i < ARRAY_SIZE(cs35l41_fs_rates); i++) {
 		if (rate == cs35l41_fs_rates[i].rate)
 			break;
@@ -1340,7 +1340,7 @@ static int cs35l41_pcm_hw_params(struct snd_pcm_substream *substream,
 				     0);
 #endif
 	regmap_read(cs35l41->regmap, CS35L41_PLL_CLK_CTRL, &val);
-	dev_info(cs35l41->dev, "%s: After 0x2c04 <= 0x%x\n", __func__, val);
+	dev_dbg(cs35l41->dev, "%s: After 0x2c04 <= 0x%x\n", __func__, val);
 
 	if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK) {
 		regmap_update_bits(cs35l41->regmap, CS35L41_SP_FORMAT,
@@ -1437,7 +1437,7 @@ static int cs35l41_component_set_sysclk(struct snd_soc_component *component,
 		return 0;
 	}
 
-	dev_info(cs35l41->dev, "%s: clk_id=%d, src=%d, freq=%d, dir=%d\n",
+	dev_dbg(cs35l41->dev, "%s: clk_id=%d, src=%d, freq=%d, dir=%d\n",
 		 __func__, clk_id, source, freq, dir);
 
 	switch (clk_id) {
