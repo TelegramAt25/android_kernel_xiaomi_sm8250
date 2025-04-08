@@ -4063,7 +4063,8 @@ out:
 	return ret;
 }
 
-int wm_adsp_compr_free(struct snd_compr_stream *stream)
+int wm_adsp_compr_free(struct snd_soc_component *component,
+		       struct snd_compr_stream *stream)
 {
 	struct wm_adsp_compr *compr = stream->runtime->private_data;
 	struct wm_adsp *dsp = compr->dsp;
@@ -4138,7 +4139,8 @@ static inline unsigned int wm_adsp_compr_frag_words(struct wm_adsp_compr *compr)
 	return compr->size.fragment_size / compr->dsp->data_word_size;
 }
 
-int wm_adsp_compr_set_params(struct snd_compr_stream *stream,
+int wm_adsp_compr_set_params(struct snd_soc_component *component,
+			     struct snd_compr_stream *stream,
 			     struct snd_compr_params *params)
 {
 	struct wm_adsp_compr *compr = stream->runtime->private_data;
@@ -4164,7 +4166,8 @@ int wm_adsp_compr_set_params(struct snd_compr_stream *stream,
 	return 0;
 }
 
-int wm_adsp_compr_get_caps(struct snd_compr_stream *stream,
+int wm_adsp_compr_get_caps(struct snd_soc_component *component,
+			   struct snd_compr_stream *stream,
 			   struct snd_compr_caps *caps)
 {
 	struct wm_adsp_compr *compr = stream->runtime->private_data;
@@ -4554,7 +4557,8 @@ static int wm_adsp_buffer_get_error(struct wm_adsp_compr_buf *buf)
 	return 0;
 }
 
-int wm_adsp_compr_trigger(struct snd_compr_stream *stream, int cmd)
+int wm_adsp_compr_trigger(struct snd_soc_component *component,
+			  struct snd_compr_stream *stream, int cmd)
 {
 	struct wm_adsp_compr *compr = stream->runtime->private_data;
 	struct wm_adsp *dsp = compr->dsp;
@@ -4718,7 +4722,8 @@ static int wm_adsp_buffer_reenable_irq(struct wm_adsp_compr_buf *buf)
 				    buf->irq_count);
 }
 
-int wm_adsp_compr_pointer(struct snd_compr_stream *stream,
+int wm_adsp_compr_pointer(struct snd_soc_component *component,
+			  struct snd_compr_stream *stream,
 			  struct snd_compr_tstamp *tstamp)
 {
 	struct wm_adsp_compr *compr = stream->runtime->private_data;
@@ -4878,7 +4883,8 @@ static int wm_adsp_compr_read(struct wm_adsp_compr *compr, char __user *buf,
 	return ntotal;
 }
 
-int wm_adsp_compr_copy(struct snd_compr_stream *stream, char __user *buf,
+int wm_adsp_compr_copy(struct snd_soc_component *component,
+		       struct snd_compr_stream *stream, char __user *buf,
 		       size_t count)
 {
 	struct wm_adsp_compr *compr = stream->runtime->private_data;
