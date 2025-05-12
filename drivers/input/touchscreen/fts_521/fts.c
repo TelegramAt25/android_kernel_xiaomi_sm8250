@@ -5996,10 +5996,12 @@ static void fts_update_grip_mode(void)
 			.touch_mode[Touch_Panel_Orientation][SET_CUR_VALUE];
 	int i = 0, ret = 0;
 	u8 grip_cmd[4] = { 0xc0, 0x08, 0x00, 0x00 };
+#ifdef GRIP_MODE_DEBUG
 	u8 grip_rcmd[2] = { 0xc1, 0x08 };
 	u8 grip_value[2] = {
 		0x00,
 	};
+#endif
 
 	MI_TOUCH_LOGI(1, "%s %s: game_mode_on:%d, direction:%d\n", tag,
 		      __func__, gamemode_on, direction);
