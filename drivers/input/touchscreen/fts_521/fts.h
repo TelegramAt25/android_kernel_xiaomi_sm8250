@@ -94,7 +94,7 @@
 
 #define COVER_MODE
 
-#define STYLUS_MODE
+/* #define STYLUS_MODE */
 
 /**** END ****/
 
