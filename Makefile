@@ -523,6 +523,7 @@ CLANG_FLAGS	+= -Werror=unknown-warning-option -Wno-unknown-warning-option
 CLANG_FLAGS	+= $(call cc-option, -Wno-unsequenced)
 CLANG_FLAGS	+= $(call cc-option, -Wno-default-const-init-field-unsafe)
 CLANG_FLAGS	+= $(call cc-option, -Wno-default-const-init-var-unsafe)
+CLANG_FLAGS	+= $(call cc-option, -Wno-tautological-pointer-compare)
 KBUILD_CFLAGS	+= $(CLANG_FLAGS)
 KBUILD_AFLAGS	+= $(CLANG_FLAGS)
 export CLANG_FLAGS
