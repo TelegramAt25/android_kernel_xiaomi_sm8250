@@ -999,6 +999,7 @@ struct send_signal_irq_work {
 
 static DEFINE_PER_CPU(struct send_signal_irq_work, send_signal_work);
 
+#ifdef CONFIG_MODULES
 static void do_bpf_send_signal(struct irq_work *entry)
 {
 	struct send_signal_irq_work *work;
@@ -1006,6 +1007,7 @@ static void do_bpf_send_signal(struct irq_work *entry)
 	work = container_of(entry, struct send_signal_irq_work, irq_work);
 	group_send_sig_info(work->sig, SEND_SIG_PRIV, work->task, work->type);
 }
+#endif
 
 static int bpf_send_signal_common(u32 sig, enum pid_type type)
 {
