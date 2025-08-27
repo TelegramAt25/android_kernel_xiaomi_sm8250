@@ -1985,6 +1985,7 @@ static void pl_config_init(struct pl_data *chip, int smb_version)
 
 static void qcom_batt_create_debugfs(struct pl_data *chip)
 {
+#ifdef CONFIG_DEBUG_FS
 	struct dentry *entry;
 
 	chip->dfs_root = debugfs_create_dir("battery", NULL);
@@ -1999,6 +2000,7 @@ static void qcom_batt_create_debugfs(struct pl_data *chip)
 	if (IS_ERR_OR_NULL(entry))
 		pr_err("Couldn't create force_dc_psy_update file rc=%ld\n",
 			(long)entry);
+#endif
 }
 
 #define DEFAULT_RESTRICTED_CURRENT_UA	1000000
